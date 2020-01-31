@@ -5,7 +5,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 
-def answer_01(data):
+def answer_01(df):
     """
     Write a code which standardizes the column of given data EXCEPT THE LAST ONE !
 
@@ -18,9 +18,11 @@ def answer_01(data):
         scaled_data [pandas.DataFrame]: Rescaled data except last column
 
     """
-    # TODO : standardize data
-    scaled_data = data
-    return scaled_data
+    df_scaled = df
+    df_scaled.iloc[:, :2] = (df.iloc[:,:2]-df.iloc[:,:2].mean())/df.iloc[:,:2].std()
+    #df_scaled.describe()
+ 
+    return df_scaled
 
 
 def answer_02():
@@ -31,10 +33,9 @@ def answer_02():
     -------
         nearest_neighbors class
     """
-    # Wrong classifier
-    from sklearn.naive_bayes import GaussianNB
+    from sklearn.neighbors import KNeighborsClassifier as sklearn_model
 
-    return GaussianNB
+    return sklearn_model
 
 
 def answer_03():
@@ -47,7 +48,7 @@ def answer_03():
     Returns
     -------
     """
-    from sklearn.metrics import accuracy_score as sklearn_metric
+    from sklearn.metrics import balanced_accuracy_score as sklearn_metric
     return sklearn_metric
 
 
@@ -64,7 +65,7 @@ def answer_04():
     YES = 'YES'
     NO = 'NO'
     # Return YES or NO
-    return None
+    return NO
 
 
 def answer_05():
@@ -80,7 +81,8 @@ def answer_05():
     CASE3 = "CS"
     CASE4 = "CROP"
     # Return CASE1, CASE2, CASE3 or CASE4
-    return None
+    #Sur notre graphique la colonne de CS est la deuxième en comptant à partir de 1
+    return CASE3
 
 
 
@@ -92,7 +94,7 @@ def answer_06():
     under_fitting = "under-fitting"
     over_fitting  = "over-fitting"
     # Return under_fitting or over_fitting
-    return None
+    return over_fitting
 
 
 def answer_07():
@@ -102,7 +104,7 @@ def answer_07():
     under_fitting = "under-fitting"
     over_fitting  = "over-fitting"
     # Return under_fitting or over_fitting
-    return None
+    return under_fitting
 
 
 def answer_08():
@@ -113,7 +115,7 @@ def answer_08():
          "Decision Tree", "Random Forest", "Neural Net", "AdaBoost",
          "Naive Bayes", "QDA"]
 
-    overfitting_models = ["Replace", "with", "model", "names", "from", "the",  "list", "above"]
+    overfitting_models = ['RBF SVM', 'Decision Tree', 'Random Forest']
     return overfitting_models
 
 
@@ -125,7 +127,7 @@ def answer_09():
          "Decision Tree", "Random Forest", "Neural Net", "AdaBoost",
          "Naive Bayes", "QDA"]
 
-    underfitting_models = ["Replace", "with", "model", "names", "from", "the", "list", "above"]
+    underfitting_models = ['Linear SVM', 'Naive Bayes']
     return underfitting_models
 
 
